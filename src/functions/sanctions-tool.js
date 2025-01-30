@@ -49,6 +49,7 @@ app.http('sanctions-tool', {
                 // Handle GET request (retrieve company data)
                 const NameAlias_WholeName = request.query.get('NameAlias_WholeName');
                 if (NameAlias_WholeName) {
+                    
                     // Query for specific company
                     const querySpec = {
                         query: "SELECT * FROM c WHERE c.NameAlias_WholeName = @NameAlias_WholeName",
