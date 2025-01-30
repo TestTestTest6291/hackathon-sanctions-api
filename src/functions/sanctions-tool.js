@@ -3,6 +3,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 const { app } = require('@azure/functions');
 const { CosmosClient } = require('@azure/cosmos');
 
+console.log("ENDPOIBT, ", process.env.COSMOS_KEY)
 // Validate environment variables
 const cosmosEndpoint = process.env.COSMOS_ENDPOINT;
 const cosmosKey = process.env.COSMOS_KEY;
@@ -46,15 +47,15 @@ app.http('sanctions-tool', {
                 };
             } else {
                 // Handle GET request (retrieve company data)
-                const companyName = request.query.get('companyName');
-                if (companyName) {
+                const NameAlias_WholeName = request.query.get('NameAlias_WholeName');
+                if (NameAlias_WholeName) {
                     // Query for specific company
                     const querySpec = {
-                        query: "SELECT * FROM c WHERE c.companyName = @companyName",
+                        query: "SELECT * FROM c WHERE c.NameAlias_WholeName = @NameAlias_WholeName",
                         parameters: [
                             {
-                                name: "@companyName",
-                                value: companyName
+                                name: "@NameAlias_WholeName",
+                                value: NameAlias_WholeName
                             }
                         ]
                     };
